@@ -1,0 +1,84 @@
+<h1>Run Tracker</h1>
+<span>
+  <button *ngIf="!average && !selected && !week" class="btn btn-danger" (click)= averageRun()>Calculate Average</button>
+  <button *ngIf="!total && !selected && !week" class="btn btn-danger" (click)= totalRun()>Calculate Total</button>
+  <button *ngIf="!average && !selected && week" class="btn btn-danger" (click)= weeklyAverageRun()>Calculate Average</button>
+  <button *ngIf="!total && !selected && week" class="btn btn-danger" (click)= weeklyTotalRun()>Calculate Total</button>
+</span>
+<span>
+  <div *ngIf="average && !selected" class = "average">
+    <h1>Average Run</h1>
+    <h3>Time: {{average[1] | number: '1.1-2'}}</h3>
+    <h3>Miles: {{average[0] | number: '1.1-2'}}</h3>
+    <button class="btn btn-danger" (click)= clearAverage()>Clear</button>
+  </div>
+  <div *ngIf="total && !selected" class = "total">
+    <h1>Total Runtime and Miles</h1>
+    <h3>Time: {{total[1] | number: '1.1-2'}}</h3>
+    <h3>Miles: {{total[0] | number: '1.1-2'}}</h3>
+    <button class="btn btn-danger" (click)= clearTotal()>Clear</button>
+  </div>
+</span>
+
+<table *ngIf="!selected" class="table table-striped table-hover">
+  <thead class="thead-dark">
+    <tr>
+      <th>Week</th>
+      <th>Time</th>
+      <th>Miles</th>
+      <th>Comments</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let run of runs | weekFilter: week">
+      <td>{{run.week}}</td>
+      <td>{{run.time}}</td>
+      <td>{{run.miles}}</td>
+      <td (click)= displayTodo(run)>{{run.comments}}</td>
+      <td>
+        <button class="btn btn-danger" (click)= deleteRun(run.id)>Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+  <span *ngIf="!selected">Sort by Weeks:
+  <select name="Weeks Ran" [(ngModel)] = "week">
+      <option></option>
+      <option *ngFor="let runWeeks of findWeeks()" >{{runWeeks}}</option>
+    </select>
+  </span>
+  <button *ngIf="week" (click)= clearWeek() >View all runs</button>
+<form action="" *ngIf="!selected">
+  <input type="text" name="week" placeholder="Week" [(ngModel)]="newRun.week">
+  <br>
+  <input type="text" name="time" placeholder="Time" [(ngModel)]="newRun.time">
+  <br>
+  <input type="text" name="miles" placeholder="Miles" [(ngModel)]="newRun.miles">
+  <br>
+  <input type="text" name="comments" placeholder="Comments" [(ngModel)]="newRun.comments">
+  <br>
+  <input type="submit" name="submit" value="Add Run" (click)= addRun()>
+</form>
+<form action="" *ngIf="editRun">
+  <input type="text" name="week" placeholder="Week" [(ngModel)]="editRun.week">
+  <br>
+  <input type="text" name="time" placeholder="Time" [(ngModel)]="editRun.time">
+  <br>
+  <input type="text" name="miles" placeholder="Miles" [(ngModel)]="editRun.miles">
+  <br>
+  <input type="text" name="comments" placeholder="Comments" [(ngModel)]="editRun.comments">
+  <br>
+  <input type="submit" name="submit" value="Save" (click)="saveEditRun()">
+  <input type="submit" name="submit" value="Cancel" (click)="cancelEditRun()">
+</form>
+
+<div *ngIf="selected && !editTodo">
+  <h5>Run Id: {{selected.id}}</h5>
+  <h4>Week: {{selected.week}}</h4>
+  <h4>Time: {{selected.time}}</h4>
+  <h4>Miles: {{selected.miles}}</h4>
+  <h4>Comments: {{selected.comments}}</h4>
+  <button class="btn btn-danger" (click)= displayTable()>Back</button>
+  <button class="btn btn-danger" (click)= setEditRun()>Edit</button>
+</div>
