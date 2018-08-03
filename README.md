@@ -1,27 +1,8 @@
-# NgEventTracker
+## Event Tracker
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.8.
+  This project was designed to merge with the Java backend that I had created earlier in the program. The project works by having services that call to the Java back-end portion. The Angular side takes the data returned from running those RESTful controller routes and places it into the HTML to be presented in a useful way to the user.
 
-## Development server
+## User Function
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+  The user is able to add runs with their distance, time, week, and description. They are able to update/delete this information when viewing the details of a single run. The user is able to view their total/average run distance and time. They are also able to sort their runs by week and view total/average for the week. This data is aggregated in the Java backend. 
+  
